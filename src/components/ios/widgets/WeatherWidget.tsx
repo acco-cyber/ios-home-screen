@@ -1,8 +1,7 @@
 'use client'
 
 import { useMemo } from 'react'
-import { Droplets, Wind } from 'lucide-react'
-import { getWeather, conditionLabel, type Condition } from '@/lib/ios/weather'
+import { getWeather, conditionLabel } from '@/lib/ios/weather'
 import { useNow, usePulse, cx } from '@/lib/ios/hooks'
 import { useOS } from '@/lib/ios/store'
 import { WeatherGlyph } from './WeatherGlyph'
@@ -39,8 +38,8 @@ export function WeatherWidget({ className }: { className?: string }) {
           H:{weather.hi}° L:{weather.lo}°
         </div>
       </div>
-      <div className="relative flex items-end justify-between text-[11px] text-white/90">
-        <div className="flex gap-4">
+      <div className="relative flex items-center justify-between text-[11px] text-white/90">
+        <div className="flex flex-1 justify-between pr-1">
           {weather.hourly.slice(1, 4).map((h) => (
             <div key={h.label} className="flex flex-col items-center gap-[3px]">
               <span>{h.label}</span>
@@ -48,14 +47,6 @@ export function WeatherWidget({ className }: { className?: string }) {
               <span className="font-semibold">{Math.round(h.temp)}°</span>
             </div>
           ))}
-        </div>
-        <div className="flex shrink-0 flex-col items-end gap-[3px] pb-[2px] text-[10px] text-white/80">
-          <span className="flex items-center gap-1 whitespace-nowrap">
-            <Droplets size={10} /> {weather.humidity}%
-          </span>
-          <span className="flex items-center gap-1 whitespace-nowrap">
-            <Wind size={10} /> {weather.wind}km/h
-          </span>
         </div>
       </div>
     </button>
